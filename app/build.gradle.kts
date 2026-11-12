@@ -35,6 +35,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        // android.util.Log в локальных тестах возвращает значения по умолчанию, а не падает
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
