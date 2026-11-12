@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Flight Search</string>
+    <string name="search_hint">Departure airport: code or name</string>
+    <string name="title_suggestions">Airports</string>
+    <string name="title_flights_from">Flights from %1$s · %2$s</string>
+    <string name="title_favorites">Favorite routes</string>
+    <string name="label_depart">Depart</string>
+    <string name="label_arrive">Arrive</string>
+    <string name="flight_number">Flight FS %1$d</string>
+    <string name="action_add_favorite">Add route to favorites</string>
+    <string name="action_remove_favorite">Remove route from favorites</string>
+    <string name="empty_favorites">No favorite routes yet. Find an airport and tap the star next to a flight.</string>
+    <string name="empty_search">Nothing found for “%1$s”. Try an IATA code such as SVO or part of the airport name.</string>
+    <string name="error_database">Could not read the flight database. Restart the app and try again.</string>
+
+    <plurals name="passengers_per_year">
+        <item quantity="one">%1$s passenger a year</item>
+        <item quantity="other">%1$s passengers a year</item>
+    </plurals>
+</resources>

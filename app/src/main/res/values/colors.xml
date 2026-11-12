@@ -2,4 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="brand_primary">#FF2A5EA8</color>
+    <color name="brand_on_primary">#FFFFFFFF</color>
+    <color name="brand_primary_container">#FFD6E3FF</color>
+    <color name="brand_on_primary_container">#FF001B3E</color>
+    <color name="brand_secondary">#FF555F71</color>
+    <color name="brand_on_secondary">#FFFFFFFF</color>
+    <color name="brand_secondary_container">#FFD9E3F8</color>
+    <color name="brand_on_secondary_container">#FF121C2B</color>
+    <color name="brand_surface">#FFF9F9FF</color>
+    <color name="brand_on_surface">#FF191C20</color>
+    <color name="brand_surface_container_highest">#FFE2E2E9</color>
+    <color name="brand_on_surface_variant">#FF44474E</color>
+    <color name="brand_outline">#FF74777F</color>
+
+    <color name="app_bar_background">#FF2A5EA8</color>
+    <color name="app_bar_content">#FFFFFFFF</color>
+    <color name="favorite_star">#FFA35A00</color>
 </resources>

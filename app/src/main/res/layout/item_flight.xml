@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewFilledStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/card_padding">
+
+        <TextView
+            android:id="@+id/depart_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/label_icon_padding"
+            android:gravity="center_vertical"
+            android:text="@string/label_depart"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:drawableStartCompat="@drawable/ic_flight_takeoff"
+            app:drawableTint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toStartOf="@id/favorite_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/depart_code"
+            android:layout_width="@dimen/flight_code_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/flight_line_spacing"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_label"
+            tools:text="FCO" />
+
+        <TextView
+            android:id="@+id/depart_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toStartOf="@id/favorite_button"
+            app:layout_constraintStart_toEndOf="@id/depart_code"
+            app:layout_constraintTop_toTopOf="@id/depart_code"
+            tools:text="Leonardo da Vinci International Airport" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/depart_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="depart_code,depart_name" />
+
+        <TextView
+            android:id="@+id/arrive_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/flight_block_spacing"
+            android:drawablePadding="@dimen/label_icon_padding"
+            android:gravity="center_vertical"
+            android:text="@string/label_arrive"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:drawableStartCompat="@drawable/ic_flight_land"
+            app:drawableTint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toStartOf="@id/favorite_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_bottom" />
+
+        <TextView
+            android:id="@+id/arrive_code"
+            android:layout_width="@dimen/flight_code_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/flight_line_spacing"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/arrive_label"
+            tools:text="CPH" />
+
+        <TextView
+            android:id="@+id/arrive_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toStartOf="@id/favorite_button"
+            app:layout_constraintStart_toEndOf="@id/arrive_code"
+            app:layout_constraintTop_toTopOf="@id/arrive_code"
+            tools:text="Copenhagen Airport" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/arrive_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="arrive_code,arrive_name" />
+
+        <TextView
+            android:id="@+id/flight_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/flight_block_spacing"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toStartOf="@id/favorite_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/arrive_bottom"
+            tools:text="Flight FS 1220" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/favorite_button"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_star_outline"
+            app:iconSize="@dimen/favorite_icon_size"
+            app:iconTint="@color/favorite_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:contentDescription="@string/action_add_favorite" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
