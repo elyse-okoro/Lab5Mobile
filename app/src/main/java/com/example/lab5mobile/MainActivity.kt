@@ -28,6 +28,7 @@ import com.example.lab5mobile.ui.ScreenMode
 import com.example.lab5mobile.ui.list.AirportAdapter
 import com.example.lab5mobile.ui.list.FavoriteRouteAdapter
 import com.example.lab5mobile.ui.list.FlightAdapter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { viewModel.searchQuery.collect { query -> syncSearchField(query) } }
                 launch { viewModel.uiState.collect { state -> render(state) } }
+                launch { viewModel.saveFailed.collect { showSaveError() } }
             }
         }
     }
@@ -74,6 +76,10 @@ class MainActivity : AppCompatActivity() {
             binding.resultsList.updatePadding(bottom = listBottomPadding + maxOf(bars.bottom, keyboard.bottom))
             insets
         }
+    }
+
+    private fun showSaveError() {
+        Snackbar.make(binding.main, R.string.error_save, Snackbar.LENGTH_LONG).show()
     }
 
     private fun setupSearchField() {

@@ -12,6 +12,7 @@
     <string name="empty_favorites">Избранных маршрутов пока нет. Найдите аэропорт и нажмите звёздочку у рейса.</string>
     <string name="empty_search">По запросу «%1$s» ничего не нашлось. Попробуйте код IATA, например SVO, или часть названия аэропорта.</string>
     <string name="error_database">Не удалось прочитать базу рейсов. Перезапустите приложение.</string>
+    <string name="error_save">Не удалось сохранить изменение. Попробуйте ещё раз.</string>
 
     <plurals name="passengers_per_year">
         <item quantity="one">%1$s пассажир в год</item>

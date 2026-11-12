@@ -20,6 +20,9 @@ class FakeFlightRepository(airports: List<Airport> = TestAirports.all) : FlightR
     val favoriteCount: Int
         get() = favorites.value.size
 
+    /** Имитация сбоя записи в базу. */
+    var failOnSave = false
+
     override fun searchAirports(query: String): Flow<List<Airport>> = MutableStateFlow(
         airportList.filter {
             it.iataCode.startsWith(query, ignoreCase = true) || it.name.contains(query, ignoreCase = true)
@@ -40,6 +43,7 @@ class FakeFlightRepository(airports: List<Airport> = TestAirports.all) : FlightR
         }
 
     override suspend fun toggleFavorite(departureCode: String, destinationCode: String) {
+        check(!failOnSave) { "disk is full" }
         val exists = favorites.value.any {
             it.departureCode == departureCode && it.destinationCode == destinationCode
         }

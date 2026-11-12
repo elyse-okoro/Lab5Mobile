@@ -22,7 +22,7 @@ class SearchPreferencesRepository(
     override val lastQuery: Flow<String> = dataStore.data
         .catch { error ->
             if (error is IOException) {
-                Log.e(TAG, "Не удалось прочитать настройки поиска", error)
+                Log.e(TAG, "Reading search preferences failed", error)
                 emit(emptyPreferences())
             } else {
                 throw error

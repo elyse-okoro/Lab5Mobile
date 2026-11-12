@@ -136,6 +136,32 @@ class FlightSearchViewModelTest {
     }
 
     @Test
+    fun failedSave_isReportedToScreenInsteadOfCrash() = runTest {
+        val viewModel = createViewModel(FakeSearchQueryRepository(initial = "SVO"))
+        collect(viewModel)
+        var reports = 0
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.saveFailed.collect { reports++ } }
+        repository.failOnSave = true
+
+        viewModel.onFlightFavoriteClicked(viewModel.uiState.value.flights.first())
+
+        assertEquals(1, reports)
+        assertEquals(0, repository.favoriteCount)
+    }
+
+    @Test
+    fun searchAction_withoutExactCode_picksTopSuggestion() = runTest {
+        val viewModel = createViewModel(FakeSearchQueryRepository())
+        collect(viewModel)
+
+        viewModel.onQueryChanged("s")
+        val top = viewModel.uiState.value.airports.first()
+        viewModel.onSearchSubmitted()
+
+        assertEquals(top, viewModel.uiState.value.departure)
+    }
+
+    @Test
     fun favoriteRoute_canBeRemovedFromFavoritesList() = runTest {
         val viewModel = createViewModel(FakeSearchQueryRepository())
         collect(viewModel)

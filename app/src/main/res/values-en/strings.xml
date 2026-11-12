@@ -12,6 +12,7 @@
     <string name="empty_favorites">No favorite routes yet. Find an airport and tap the star next to a flight.</string>
     <string name="empty_search">Nothing found for “%1$s”. Try an IATA code such as SVO or part of the airport name.</string>
     <string name="error_database">Could not read the flight database. Restart the app and try again.</string>
+    <string name="error_save">The change was not saved. Try again.</string>
 
     <plurals name="passengers_per_year">
         <item quantity="one">%1$s passenger a year</item>

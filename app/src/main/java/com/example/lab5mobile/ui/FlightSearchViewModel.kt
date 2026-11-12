@@ -12,11 +12,15 @@ import com.example.lab5mobile.domain.usecase.GetFavoriteRoutesUseCase
 import com.example.lab5mobile.domain.usecase.RemoveFavoriteUseCase
 import com.example.lab5mobile.domain.usecase.SearchAirportsUseCase
 import com.example.lab5mobile.domain.usecase.ToggleFavoriteUseCase
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
@@ -43,6 +47,11 @@ class FlightSearchViewModel(
 
     /** Текст поля поиска; экран подставляет его, когда запрос меняет не пользователь. */
     val searchQuery: StateFlow<String> = query.asStateFlow()
+
+    private val saveErrors = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+
+    /** Изменение не удалось сохранить в базе или настройках: экран показывает сообщение. */
+    val saveFailed: SharedFlow<Unit> = saveErrors.asSharedFlow()
 
     val uiState: StateFlow<FlightSearchUiState> =
         combine(query, selectedAirportCode, isRestored) { text, code, restored ->
@@ -93,24 +102,32 @@ class FlightSearchViewModel(
 
     /** Кнопка «Найти» на клавиатуре: точное совпадение кода IATA, иначе первая подсказка. */
     fun onSearchSubmitted() {
-        val state = uiState.value
-        if (state.mode != ScreenMode.SUGGESTIONS || state.airports.isEmpty()) return
         val text = query.value.trim()
-        val airport = state.airports.firstOrNull { it.iataCode.equals(text, ignoreCase = true) }
-            ?: state.airports.first()
-        onAirportSelected(airport)
+        if (text.isEmpty() || selectedAirportCode.value != null) return
+        viewModelScope.launch {
+            // подсказки на экране могли остаться от прежнего текста, поэтому список берём заново
+            val airports = try {
+                searchAirports(text).first()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                Log.e(TAG, "Database query failed", error)
+                return@launch
+            }
+            val airport = airports.firstOrNull { it.iataCode.equals(text, ignoreCase = true) }
+                ?: airports.firstOrNull()
+            if (airport != null && text == query.value.trim()) {
+                onAirportSelected(airport)
+            }
+        }
     }
 
     fun onFlightFavoriteClicked(flight: Flight) {
-        viewModelScope.launch {
-            toggleFavorite(flight.departure.iataCode, flight.destination.iataCode)
-        }
+        launchSaving { toggleFavorite(flight.departure.iataCode, flight.destination.iataCode) }
     }
 
     fun onFavoriteRouteRemoved(route: FavoriteRoute) {
-        viewModelScope.launch {
-            removeFavorite(route.departureCode, route.destinationCode)
-        }
+        launchSaving { removeFavorite(route.departureCode, route.destinationCode) }
     }
 
     private fun departureBoardState(text: String, code: String): Flow<FlightSearchUiState> =
@@ -152,8 +169,20 @@ class FlightSearchViewModel(
         }
 
     private fun saveQuery(value: String) {
+        launchSaving { searchQueryRepository.saveLastQuery(value) }
+    }
+
+    /** Запись в базу и DataStore: ошибка не роняет приложение, о ней узнаёт экран. */
+    private fun launchSaving(save: suspend () -> Unit) {
         viewModelScope.launch {
-            searchQueryRepository.saveLastQuery(value)
+            try {
+                save()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                Log.e(TAG, "Saving failed", error)
+                saveErrors.tryEmit(Unit)
+            }
         }
     }
 
