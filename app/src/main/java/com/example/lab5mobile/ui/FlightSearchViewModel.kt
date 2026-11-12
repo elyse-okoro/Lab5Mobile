@@ -9,6 +9,7 @@ import com.example.lab5mobile.domain.model.Flight
 import com.example.lab5mobile.domain.repository.SearchQueryRepository
 import com.example.lab5mobile.domain.usecase.GetDepartureBoardUseCase
 import com.example.lab5mobile.domain.usecase.GetFavoriteRoutesUseCase
+import com.example.lab5mobile.domain.usecase.RemoveFavoriteUseCase
 import com.example.lab5mobile.domain.usecase.SearchAirportsUseCase
 import com.example.lab5mobile.domain.usecase.ToggleFavoriteUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,6 +33,7 @@ class FlightSearchViewModel(
     private val getDepartureBoard: GetDepartureBoardUseCase,
     private val getFavoriteRoutes: GetFavoriteRoutesUseCase,
     private val toggleFavorite: ToggleFavoriteUseCase,
+    private val removeFavorite: RemoveFavoriteUseCase,
     private val searchQueryRepository: SearchQueryRepository
 ) : ViewModel() {
 
@@ -101,13 +103,13 @@ class FlightSearchViewModel(
 
     fun onFlightFavoriteClicked(flight: Flight) {
         viewModelScope.launch {
-            toggleFavorite(flight.departure.iataCode, flight.destination.iataCode, flight.isFavorite)
+            toggleFavorite(flight.departure.iataCode, flight.destination.iataCode)
         }
     }
 
     fun onFavoriteRouteRemoved(route: FavoriteRoute) {
         viewModelScope.launch {
-            toggleFavorite(route.departureCode, route.destinationCode, isFavorite = true)
+            removeFavorite(route.departureCode, route.destinationCode)
         }
     }
 

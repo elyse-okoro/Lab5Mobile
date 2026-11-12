@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lab5mobile.data.AppContainer
 import com.example.lab5mobile.domain.usecase.GetDepartureBoardUseCase
 import com.example.lab5mobile.domain.usecase.GetFavoriteRoutesUseCase
+import com.example.lab5mobile.domain.usecase.RemoveFavoriteUseCase
 import com.example.lab5mobile.domain.usecase.SearchAirportsUseCase
 import com.example.lab5mobile.domain.usecase.ToggleFavoriteUseCase
 
@@ -24,6 +25,7 @@ class FlightSearchViewModelFactory(
                 getDepartureBoard = GetDepartureBoardUseCase(repository),
                 getFavoriteRoutes = GetFavoriteRoutesUseCase(repository),
                 toggleFavorite = ToggleFavoriteUseCase(repository),
+                removeFavorite = RemoveFavoriteUseCase(repository),
                 searchQueryRepository = container.searchQueryRepository
             ) as T
         }

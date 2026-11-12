@@ -16,7 +16,8 @@ interface FlightRepository {
 
     fun getFavoriteDestinationCodes(departureCode: String): Flow<Set<String>>
 
-    suspend fun addFavorite(departureCode: String, destinationCode: String)
+    /** Добавляет маршрут в избранное или убирает его, если он уже там. Решение — по данным базы. */
+    suspend fun toggleFavorite(departureCode: String, destinationCode: String)
 
     suspend fun removeFavorite(departureCode: String, destinationCode: String)
 }
