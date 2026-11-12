@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:minHeight="@dimen/airport_item_min_height"
+    android:paddingHorizontal="@dimen/airport_item_padding_horizontal"
+    android:paddingVertical="@dimen/airport_item_padding_vertical">
+
+    <TextView
+        android:id="@+id/airport_code"
+        android:layout_width="@dimen/airport_code_width"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="SVO" />
+
+    <TextView
+        android:id="@+id/airport_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/airport_code"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sheremetyevo - A.S. Pushkin international airport" />
+
+    <TextView
+        android:id="@+id/airport_passengers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/airport_passengers_margin_top"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/airport_name"
+        app:layout_constraintTop_toBottomOf="@id/airport_name"
+        tools:text="49 933 000 passengers a year" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

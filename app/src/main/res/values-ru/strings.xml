@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Поиск рейсов</string>
+    <string name="search_hint">Аэропорт вылета: код или название</string>
+    <string name="title_suggestions">Аэропорты</string>
+    <string name="title_flights_from">Рейсы из %1$s · %2$s</string>
+    <string name="title_favorites">Избранные маршруты</string>
+    <string name="label_depart">Вылет</string>
+    <string name="label_arrive">Прилёт</string>
+    <string name="flight_number">Рейс FS %1$d</string>
+    <string name="action_add_favorite">Добавить маршрут в избранное</string>
+    <string name="action_remove_favorite">Убрать маршрут из избранного</string>
+    <string name="empty_favorites">Избранных маршрутов пока нет. Найдите аэропорт и нажмите звёздочку у рейса.</string>
+    <string name="empty_search">По запросу «%1$s» ничего не нашлось. Попробуйте код IATA, например SVO, или часть названия аэропорта.</string>
+    <string name="error_database">Не удалось прочитать базу рейсов. Перезапустите приложение.</string>
+
+    <plurals name="passengers_per_year">
+        <item quantity="one">%1$s пассажир в год</item>
+        <item quantity="few">%1$s пассажира в год</item>
+        <item quantity="many">%1$s пассажиров в год</item>
+        <item quantity="other">%1$s пассажира в год</item>
+    </plurals>
+</resources>

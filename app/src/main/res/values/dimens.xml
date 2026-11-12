@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="content_max_width">720dp</dimen>
+    <!-- ширина колонки поиска плюс боковые отступы списка: края карточек совпадают с краями поля -->
+    <dimen name="list_max_width">736dp</dimen>
+    <dimen name="search_margin_top">16dp</dimen>
+    <dimen name="search_corner_radius">28dp</dimen>
+    <dimen name="section_margin_top">20dp</dimen>
+    <dimen name="list_margin_top">8dp</dimen>
+    <dimen name="list_padding_horizontal">8dp</dimen>
+    <dimen name="list_padding_bottom">16dp</dimen>
+
+    <dimen name="airport_item_min_height">64dp</dimen>
+    <dimen name="airport_item_padding_horizontal">8dp</dimen>
+    <dimen name="airport_item_padding_vertical">10dp</dimen>
+    <dimen name="airport_code_width">56dp</dimen>
+    <dimen name="airport_passengers_margin_top">2dp</dimen>
+
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="label_icon_padding">6dp</dimen>
+    <dimen name="flight_code_width">48dp</dimen>
+    <dimen name="flight_line_spacing">4dp</dimen>
+    <dimen name="flight_block_spacing">12dp</dimen>
+    <dimen name="favorite_icon_size">28dp</dimen>
+
+    <dimen name="empty_state_padding">32dp</dimen>
+    <dimen name="empty_icon_size">72dp</dimen>
+    <dimen name="empty_text_margin_top">16dp</dimen>
+</resources>
